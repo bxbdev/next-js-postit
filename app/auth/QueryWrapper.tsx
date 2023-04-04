@@ -9,7 +9,7 @@ interface Props {
 
 const queryClient = new QueryClient()
 
-const QueryWrapper = ({ children }: Props) => {
+export default function QueryWrapper ({ children }: Props) {
     return (
         <QueryClientProvider client={queryClient}>
             <Toaster />
@@ -18,4 +18,4 @@ const QueryWrapper = ({ children }: Props) => {
     )
 }
 
-export default QueryWrapper
+
