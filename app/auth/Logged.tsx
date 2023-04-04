@@ -17,13 +17,12 @@ export default function Logged({ image }: User) {
             >
                 Sign Out
             </button>
-            <Link href="/dashboard">
+            <Link href="/dashboard" className="flex overflow-hidden rounded-full">
                 <Image
-                    width={64} 
-                    height={64} 
+                    width={48} 
+                    height={48} 
                     src={image}
                     alt=""
-                    priority
                 />
             </Link>
         </li>

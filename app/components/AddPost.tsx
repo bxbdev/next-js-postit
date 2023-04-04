@@ -40,10 +40,10 @@ export default function CreatePost() {
     }
     
     return (
-        <form className="p-8 my-8 bg-white rounded-md" onSubmit={submitPost}>
+        <form className="p-8 bg-white rounded-md" onSubmit={submitPost}>
             <div className="flex flex-col my-4">
                 <textarea 
-                    className="p-4 my-2 text-lg bg-gray-200 border-none rounded-md outline-none h-36"
+                    className="h-24 p-4 my-2 text-lg bg-gray-200 border-none rounded-md outline-none"
                     name="title" 
                     value={title}
                     placeholder="What's on your mind?"
