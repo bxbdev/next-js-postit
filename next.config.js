@@ -6,16 +6,12 @@ const nextConfig = {
   images: {
     domains: ['lh3.googleusercontent.com', 'avatars.githubusercontent.com']
   },
-  externals: {
-    // Add any problematic dependencies here
-    'supports-color': 'supports-color'
-  },
-  // reactStrictMode: true,
-  
+  transpilePackages: ['supports-color'],
+
   // Add the following lines:
-  serverComponents: {
-    debugTraceMode: true,
-  },
+  // serverComponents: {
+  //   debugTraceMode: true,
+  // },
 }
 
 module.exports = nextConfig
