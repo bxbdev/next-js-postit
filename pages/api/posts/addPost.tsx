@@ -17,7 +17,7 @@ export default async function handler(
         const title: string = req.body.title
         const prismaUser = await prisma.user.findUnique({
             where: {
-                email: session?.user?.email
+                email: session?.user?.email ?? '',
             }
         })
 
@@ -36,7 +36,7 @@ export default async function handler(
             const result = await prisma.post.create({
                 data: {
                     title,
-                    userId: prismaUser.id,
+                    userId: prismaUser ? prismaUser.id : ''
                 }
             })
             res.status(200).json(result)

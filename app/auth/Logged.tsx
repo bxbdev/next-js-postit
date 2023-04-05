@@ -17,8 +17,9 @@ export default function Logged({ image }: User) {
             >
                 Sign Out
             </button>
-            <Link href="/dashboard" className="flex overflow-hidden rounded-full">
+            <Link href="/dashboard">
                 <Image
+                    className="rounded-full"
                     width={48} 
                     height={48} 
                     src={image}
