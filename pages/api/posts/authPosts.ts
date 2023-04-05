@@ -20,18 +20,21 @@ export default async function handler(
                 },
                 include: {
                     posts: {
+                        where: {
+                            deleted: false
+                        },
                         orderBy: {
                             createdAt: 'desc',
                         },
                         include: {
-                            comments: true
+                            comments: true,
                         }
                     }
                 }
             })
             res.status(200).json(data)
         } catch(err) {
-            res.status(403).json({err: 'Error has occurred whilst creating post'})
+            res.status(403).json({err: 'Error has occurred whilst make posts'})
         }
     }
 }

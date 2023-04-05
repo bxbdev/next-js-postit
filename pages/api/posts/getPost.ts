@@ -11,6 +11,9 @@ export default async function handler(
             // Query database for all posts
             const data = await prisma.post.findMany({
                 // associated with user and comments
+                where: {
+                    deleted: false,
+                },
                 include: {
                     user: true,
                     comments: true,

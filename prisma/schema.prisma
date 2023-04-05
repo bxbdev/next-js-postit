@@ -17,6 +17,7 @@ model Post {
   title     String   
   published Boolean  @default(false)
   deleted   Boolean  @default(false)
+  deletedAt DateTime @updatedAt
   userId    String
   user      User     @relation(fields: [userId], references: [id])
   comments  Comment[]

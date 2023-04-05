@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import { AuthPosts } from "../types/AuthPosts"
 import EditPost from "./EditPost"
+import { useState, useEffect } from 'react'
 
 const fetchAuthPosts = async () => {
     const response = await axios.get('/api/posts/authPosts')
@@ -10,10 +11,12 @@ const fetchAuthPosts = async () => {
 }
 
 export default function MyPosts() {
+
     const {data, isLoading} = useQuery<AuthPosts>({
         queryFn: fetchAuthPosts, 
-        queryKey: ['authPosts'],
+        queryKey: ['auth-posts'],
     })
+    
     if (isLoading) return <h1>Posts are loading...</h1>
     return (
         <div>
