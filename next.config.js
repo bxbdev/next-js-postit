@@ -9,7 +9,13 @@ const nextConfig = {
   externals: {
     // Add any problematic dependencies here
     'supports-color': 'supports-color'
-  }
+  },
+  // reactStrictMode: true,
+  
+  // Add the following lines:
+  serverComponents: {
+    debugTraceMode: true,
+  },
 }
 
 module.exports = nextConfig
