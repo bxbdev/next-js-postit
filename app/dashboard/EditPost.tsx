@@ -40,21 +40,20 @@ export default function EditPost({avatar, name, title, comments, id}: EditProps)
                     }
                 },
                 onSuccess: (data: any) => {
-                    console.log(data)
-                    toast.success("Post has been deleted", {id: deleteToastID})
+                    // console.log(data)
+                    // TODO: to fix toast was not showing up after deleted post
                     queryClient.invalidateQueries(['auth-posts'])
+                    toast.success("Post has been deleted", {id: deleteToastID})
                 },
             }
        }
     )
     const deletePost = () => {
+        // TODO: fix toast loading issue after delete but keep stuck
         deleteToastID = toast.loading("Deleting your post", {id: deleteToastID})
         mutate(id)
     }
 
-    const goToPost = () => {
-        redirect(`/post/${id}`)
-    }
     return (
         <>
         <div className="p-8 my-8 bg-white rounded-lg">
@@ -69,15 +68,10 @@ export default function EditPost({avatar, name, title, comments, id}: EditProps)
                 <h3 className="font-bold text-gray-700">{name}</h3>
             </div>
             <div className="my-8">
-                <Link 
-                    className="break-all"
-                    href={`/post/${id}`}
-                >
-                    {title}
-                </Link>
+                <p className="break-all" >{title}</p>
             </div>
             <div className="flex items-center gap-4">
-                <p className="text-sm text-gray-700">{comments?.length} comments</p>
+                <Link href={`/post/${id}`} className="text-sm font-bold text-gray-700">{comments?.length} comments</Link>
                 <button 
                     className="text-red-500 hover:text-red-600"
                     onClick={(e) => {

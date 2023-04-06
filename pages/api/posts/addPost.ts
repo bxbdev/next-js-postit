@@ -10,7 +10,7 @@ export default async function handler(
     if (req.method === 'POST') {
         const session = await getServerSession(req, res, authOptions)
         if (!session) 
-            return res.status(401).json({message: 'Please sign in to make a post'})
+            return res.status(403).json({message: 'Please sign in to make a post'})
 
         // console.log('POST', req.body)
 

@@ -1,15 +1,15 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { QueryClient, useMutation, useQueryClient } from "@tanstack/react-query"
+import { useState } from "react"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import axios, { AxiosError } from 'axios'
 import toast from "react-hot-toast"
 
 export default function CreatePost() {
     const [title, setTitle] = useState("")
     const [isDisabled, setIsDisabled] = useState(false)
-    let toastPostID: string
     const queryClient = useQueryClient()
+    let toastPostID: string
 
     // Check title length before send to server
     // useEffect(() => {
@@ -31,10 +31,10 @@ export default function CreatePost() {
                 setIsDisabled(false)
             },
             onSuccess: (data) => {
-                toast.success("Post has been made 🔥", {id: toastPostID})
-                queryClient.invalidateQueries(['posts'])
                 setTitle('')
                 setIsDisabled(false)
+                queryClient.invalidateQueries(['posts'])
+                toast.success("Post has been made 🔥", {id: toastPostID})
             },
         }
     )
@@ -42,6 +42,7 @@ export default function CreatePost() {
     const submitPost = async (e: React.FormEvent) => {
         e.preventDefault()
         setIsDisabled(true)
+        // TODO: fix toast loading issue after submit but keep stuck
         toastPostID = toast.loading("Creating your post", {id: toastPostID})
         mutate(title)
     }

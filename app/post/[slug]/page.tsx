@@ -1,9 +1,10 @@
 'use client'
 
+import AddComment from '@/app/components/AddComment'
 import Post from '@/app/components/Post'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import Link from 'next/link'
+import Comment from '@/app/components/Comment'
 
 const fetchDetails = async (slug: string) => {
     const response = await axios.get(`/api/posts/${slug}`)
@@ -16,6 +17,16 @@ type URL = {
     }
 }
 
+type Comment = {
+    id: string
+    message: string
+    createdAt: string
+    user: {
+        name: string
+        image: string
+    }
+}
+
 export default function PostDetail(url: URL) {
     const { data, isLoading} = useQuery({
         queryKey: ['detail-post'],
@@ -25,12 +36,6 @@ export default function PostDetail(url: URL) {
     if (isLoading) return <div>Loading...</div>
     return (
         <div className="">
-            <Link  
-                className="text-blue-500 hover:underline"
-                href="/dashboard"
-            >
-                Back to Dashboard
-            </Link>
             <Post 
                 id={data.id} 
                 avatar={data.user.image}  
@@ -38,6 +43,20 @@ export default function PostDetail(url: URL) {
                 postTitle={data.title}
                 comments={data.comments} 
             />
+            <AddComment id={data.id} />
+            {data?.comments?.map( (comment: Comment) => {
+                return (
+                    <Comment 
+                        key={comment.id}
+                        id={comment.id} 
+                        name={comment.user?.name} 
+                        avatar={comment.user?.image}
+                        comment={comment.message}
+                        time={comment.createdAt}
+                    />
+                )
+               
+            })}
         </div>
     )
 }
